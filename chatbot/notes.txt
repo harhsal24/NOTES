@@ -1,0 +1,14 @@
+
+Install Bot Framework Template:
+
+Open your terminal or command prompt and run the following command to install the Bot Framework template for .NET:
+arduino
+Copy code
+dotnet new -i Microsoft.Bot.Framework.CSharp.V4.Template
+Create a New Bot Project:
+
+Use the following command to create a new bot project:
+arduino
+Copy code
+dotnet new msteamsbot -n YourBotName
+Replace "YourBotName" with the desired name for your bot.
