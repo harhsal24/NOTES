@@ -48,3 +48,23 @@ public class Program
     }
 }
 
+
+
+
+
+
+
+// Seed method to add initial data
+    private void SeedData(ChatbotDbContext dbContext)
+    {
+        if (!dbContext.QAPairs.Any())
+        {
+            var initialData = new List<QAPair>
+            {
+                // Add your initial QAPairs here
+            };
+
+            dbContext.QAPairs.AddRange(initialData);
+            dbContext.SaveChanges();
+        }
+    }
