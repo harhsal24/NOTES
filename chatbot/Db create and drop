@@ -1,0 +1,70 @@
+public class ChatbotDbContext : DbContext
+{
+    // DbSet and other configurations...
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("your_connection_string_here");
+
+        // Create the database on startup
+        optionsBuilder.EnableServiceProviderCaching(false);
+        var dbContext = new ChatbotDbContext(optionsBuilder.Options);
+        dbContext.Database.EnsureCreated();
+    }
+}
+
+
+
+using Microsoft.Extensions.Hosting;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddDbContext<ChatbotDbContext>();
+
+        // ... rest of your code
+
+        var app = builder.Build();
+
+        var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
+
+        lifetime.ApplicationStopping.Register(() =>
+        {
+            // Drop the database on application stop
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ChatbotDbContext>();
+                dbContext.Database.EnsureDeleted();
+            }
+        });
+
+        // ... rest of your code
+
+        app.Run();
+    }
+}
+
+
+
+
+
+
+
+// Seed method to add initial data
+    private void SeedData(ChatbotDbContext dbContext)
+    {
+        if (!dbContext.QAPairs.Any())
+        {
+            var initialData = new List<QAPair>
+            {
+                // Add your initial QAPairs here
+            };
+
+            dbContext.QAPairs.AddRange(initialData);
+            dbContext.SaveChanges();
+        }
+    }
