@@ -8,7 +8,7 @@ dotnet new -i Microsoft.Bot.Framework.CSharp.V4.Template
 Create a New Bot Project:
 
 Use the following command to create a new bot project:
-arduino
+
 Copy code
 dotnet new msteamsbot -n YourBotName
 Replace "YourBotName" with the desired name for your bot.
