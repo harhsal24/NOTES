@@ -1,0 +1,13 @@
+original size: 746 kb
+
+gzip 38 ms	82kb 
+slow 55 ms	82kb
+fast 22 ms	156kb
+
+deflate 43 ms	82kb
+slow 49 ms	82kb
+fast 15 ms	156kb
+
+brotil 2435 ms	54kb
+slow 2438 ms	54kb
+fast 17 ms	145kb
