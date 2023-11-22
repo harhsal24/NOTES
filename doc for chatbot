@@ -1,0 +1,35 @@
+
+React is an open-source JavaScript library developed by Facebook for building user interfaces or UI components. It is widely used for creating single-page applications where UI changes dynamically based on user interactions. React follows a component-based architecture, allowing developers to build encapsulated and reusable UI components.
+
+To run any react application you need to have node.js installed in you system
+
+Component-Based: React applications are built using components. Each component represents a part of the user interface and can contain its own logic and state.
+
+I am creating a chotbot using functional component that supports hooks.
+
+
+I am using tailwind for css 
+Tailwind CSS is a utility-first CSS framework that provides a set of pre-designed utility classes to streamline the process of styling web applications. Unlike traditional CSS frameworks that offer predefined components, Tailwind CSS focuses on providing low-level utility classes that can be combined to build custom designs.
+
+I am using genric question that users might ask to chat bot on regular basis
+like
+Hello
+Hi
+How are you?
+What is your name?
+Goodbye
+Bye
+Who created you?
+Tell me a joke
+What is the meaning of life?
+Tell me about yourself
+Favorite color
+Where do you live?
+How old are you?
+Do you have siblings?
+What is your purpose?
+Favorite book
+Tell me a fun fact
+
+this chatbot is a static chatbot 
+static chatbot means it will only answer to question which are already given in form of code. 
