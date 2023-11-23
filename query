@@ -1,0 +1,10 @@
+USE [cb]
+GO
+
+INSERT INTO [dbo].[QuestionAnswers]
+           ([Question]
+           ,[Answer])
+     VALUES
+           (<Question, nvarchar(max),>
+           ,<Answer, nvarchar(max),>)
+GO
