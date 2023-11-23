@@ -8,3 +8,28 @@ INSERT INTO [dbo].[QuestionAnswers]
            (<Question, nvarchar(max),>
            ,<Answer, nvarchar(max),>)
 GO
+
+
+
+
+USE [cb]
+GO
+
+INSERT INTO [dbo].[QuestionAnswers] ([Question], [Answer])
+VALUES
+    ('Hello', 'Hi there! How can I assist you?'),
+    ('How are you', 'I''m just a bot, but I''m doing well! How about you?'),
+    ('What is your name', 'I''m a bot, you can call me Anjali'),
+    ('Goodbye', 'Goodbye! Feel free to reach out if you have more questions.'),
+    ('Who created you', 'I was created by some awesome developers at Fai'),
+    ('Tell me a joke', 'Why don''t scientists trust atoms? Because they make up everything!'),
+    ('What is the meaning of life', 'The meaning of life is a complex philosophical question. What do you think?'),
+    ('Tell me about yourself', 'I''m just a chatbot here to help you. Ask me anything!'),
+    ('Favorite color', 'I don''t have a favorite color, but I like all the colors equally!'),
+    ('Where do you live', 'I exist in the digital realm, no physical address for me!'),
+    ('How old are you', 'I don''t have an age, but I''m always up to date with information!'),
+    ('Do you have siblings', 'No siblings for me, I''m the only chatbot here!'),
+    ('What is your purpose', 'My purpose is to assist and provide information. How can I assist you today?'),
+    ('Favorite book', 'I don''t read books, but I can help you find information on any book!'),
+    ('Tell me a fun fact', 'Bananas are berries, but strawberries aren''t. Isn''t that interesting?');
+GO
