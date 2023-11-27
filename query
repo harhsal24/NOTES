@@ -58,3 +58,37 @@ VALUES
 (15, 'Tell me a fun fact', 'Bananas are berries, but strawberries aren''t. Isn''t that interesting?', NULL),
 (16, 'What is 2 + 3?', 'The sum of 2 and 3 is 5', 'AddNumbers');
 
+
+
+
+
+
+USE YourDatabaseName; -- Replace 'YourDatabaseName' with your actual database name
+
+INSERT INTO InventoryTable (Id, ItemName, NumberOfItem)
+VALUES
+(1, 'Laptop', 10),
+(2, 'Smartphone', 20),
+(3, 'Printer', 15),
+(4, 'Headphones', 30),
+(5, 'External Hard Drive', 25),
+(6, 'Mouse', 40),
+(7, 'Keyboard', 35),
+(8, 'Monitor', 12),
+(9, 'Desk Chair', 8),
+(10, 'Desk Lamp', 18);
+-- Add more rows as needed
+
+
+
+
+
+
+
+INSERT INTO DocumentDetails (Id, Date, Name, NumberOfTimesRead)
+VALUES
+(1, '2023-11-30 08:30:00', 'Document1', 5),
+(2, '2023-11-29 15:45:00', 'Document2', 10),
+(3, '2023-11-28 12:00:00', 'Document3', 8);
+
+
