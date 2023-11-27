@@ -33,3 +33,28 @@ VALUES
     ('Favorite book', 'I don''t read books, but I can help you find information on any book!'),
     ('Tell me a fun fact', 'Bananas are berries, but strawberries aren''t. Isn''t that interesting?');
 GO
+
+
+
+
+USE YourDatabaseName; -- Replace 'YourDatabaseName' with your actual database name
+
+INSERT INTO QuestionAnswers (Id, Question, Answer, Action)
+VALUES
+(1, 'Hello', 'Hi there! How can I assist you?', 'HelloWorld'),
+(2, 'How are you', 'I''m just a bot, but I''m doing well! How about you?', 'CheckMood'),
+(3, 'What is your name', 'I''m a bot, you can call me Anjali', 'Introduce'),
+(4, 'Goodbye', 'Goodbye! Feel free to reach out if you have more questions.', 'SayGoodbye'),
+(5, 'Who created you', 'I was created by some awesome developers at Fai', NULL),
+(6, 'Tell me a joke', 'Why don''t scientists trust atoms? Because they make up everything!', 'TellJoke'),
+(7, 'What is the meaning of life', 'The meaning of life is a complex philosophical question. What do you think?', NULL),
+(8, 'Tell me about yourself', 'I''m just a chatbot here to help you. Ask me anything!', NULL),
+(9, 'Favorite color', 'I don''t have a favorite color, but I like all the colors equally!', NULL),
+(10, 'Where do you live', 'I exist in the digital realm, no physical address for me!', NULL),
+(11, 'How old are you', 'I don''t have an age, but I''m always up to date with information!', NULL),
+(12, 'Do you have siblings', 'No siblings for me, I''m the only chatbot here!', NULL),
+(13, 'What is your purpose', 'My purpose is to assist and provide information. How can I assist you today?', NULL),
+(14, 'Favorite book', 'I don''t read books, but I can help you find information on any book!', NULL),
+(15, 'Tell me a fun fact', 'Bananas are berries, but strawberries aren''t. Isn''t that interesting?', NULL),
+(16, 'What is 2 + 3?', 'The sum of 2 and 3 is 5', 'AddNumbers');
+
