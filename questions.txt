@@ -1,0 +1,7 @@
+(0 , react_devtools_core__WEBPACK_IMPORTED_MODULE_6__.setReactDevToolsPort) is not a function
+TypeError: (0 , react_devtools_core__WEBPACK_IMPORTED_MODULE_6__.setReactDevToolsPort) is not a function
+    at ./src/index.js (https://localhost:44419/static/js/bundle.js:1692:74)
+    at options.factory (https://localhost:44419/static/js/bundle.js:119507:31)
+    at __webpack_require__ (https://localhost:44419/static/js/bundle.js:118931:33)
+    at https://localhost:44419/static/js/bundle.js:120153:37
+    at https://localhost:44419/static/js/bundle.js:120155:12
