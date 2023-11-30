@@ -1,0 +1,126 @@
+USE [cb]
+GO
+
+INSERT INTO [dbo].[QuestionAnswers]
+           (
+		   [MainQuestion]
+           ,[Answer]
+           ,[ActionToRun])
+VALUES
+    ('What is your name?', 'My name is Anjali.', 'Introduce'),
+    ('Tell me a joke.', 'Why did the chicken cross the road? To get to the other side.', 'TellJoke'),
+    ('What is the meaning of life?', 'The meaning of life is a philosophical question...', 'GetMeaningOfLife'),
+    ('Who created you?', 'I was created by a team of awesome developers.', 'GetCreator'),
+    ('What is your purpose?', 'My purpose is to assist and provide information.', 'GetPurpose'),
+    ('Can you tell me a fun fact?', 'Sure! Honey never spoils. Archaeologists have found pots of honey...', 'GetFunFact'),
+    ('How are you feeling today?', 'I''m always in a good mood!', 'CheckMood'),
+    ('Say goodbye.', 'Goodbye! Feel free to reach out if you have more questions.', 'SayGoodbye'),
+    ('Calculate the square of 5.', 'The square of 5 is 25.', 'CalculateSquare'),
+    ('What is your favorite color?', 'I don''t have a favorite color, but I like all the colors!', 'AboutBot'),
+    ('What is in your inventory?', 'I don''t have a physical inventory, but I can provide information.', 'GetInventoryItems'),
+    ('Can you dance?', 'I wish I could dance, but unfortunately, I don''t have a physical body!', 'AboutBot'),
+    ('What languages do you speak?', 'I can understand and respond in multiple languages.', 'AboutBot'),
+    ('Tell me a riddle.', 'I''m afraid I''m not good at riddles, but I can try!', 'TellJoke'),
+    ('What is your favorite food?', 'I don''t eat, so I don''t have a favorite food.', 'AboutBot');
+GO
+
+
+
+
+
+
+
+
+
+
+
+USE [cb]
+GO
+
+INSERT INTO [dbo].[VariationsTable]
+    ([QuestionAnswerId], [VariationList])
+VALUES
+    (1, 'What are you called?'),
+    (1, 'Your name?'),
+    (2, 'Say something funny'),
+    (2, 'Tell me a funny story'),
+    (3, 'Meaning of life?'),
+    (3, 'What''s the purpose of life?'),
+    (4, 'Who made you?'),
+    (4, 'Your creator?'),
+    (5, 'What''s your purpose?'),
+    (5, 'Why do you exist?'),
+    (6, 'Give me a fun fact'),
+    (6, 'Tell me something interesting'),
+    (7, 'How do you feel?'),
+    (7, 'Your mood?'),
+    (8, 'Farewell'),
+    (8, 'Say bye'),
+    (8, 'Goodbye'),
+    (9, 'Square of 5'),
+    (9, 'Calculate 5 squared'),
+    (10, 'Favorite color?'),
+    (10, 'Color you like?'),
+    (11, 'What''s in your inventory?'),
+    (11, 'List of items'),
+    (12, 'Can you dance?'),
+    (12, 'Dancing skills?'),
+    (13, 'Languages you speak?'),
+    (13, 'What languages do you understand?'),
+    (14, 'Give me a riddle'),
+    (14, 'Riddle time'),
+    (15, 'Favorite food?'),
+    (15, 'What do you eat?');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+USE [cb]
+GO
+
+INSERT INTO [dbo].[VariationsTable]
+           ([QuestionAnswerId],
+		   [VariationList])
+VALUES
+    (1, 'What are you called?;Your name?'),
+    (2, 'Say something funny;Tell me a funny story'),
+    (3, 'Meaning of life?;What''s the purpose of life?'),
+    (4, 'Who made you?;Your creator?'),
+    (5, 'What''s your purpose?;Why do you exist?'),
+    (6, 'Give me a fun fact;Tell me something interesting'),
+    (7, 'How do you feel?;Your mood?'),
+    (8, 'Farewell;Say bye;Goodbye'),
+    (9, 'Square of 5;Calculate 5 squared'),
+    (10, 'Favorite color?;Color you like?'),
+    (11, 'What''s in your inventory?;List of items'),
+    (12, 'Can you dance?;Dancing skills?'),
+    (13, 'Languages you speak?;What languages do you understand?'),
+    (14, 'Give me a riddle;Riddle time'),
+    (15, 'Favorite food?;What do you eat?');
+
+
+
