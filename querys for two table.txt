@@ -73,6 +73,11 @@ VALUES
     (15, 'What do you eat?');
 
 
+Msg 547, Level 16, State 0, Line 5
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK_VariationsTable_QuestionAnswers_QuestionAnswerId". The conflict occurred in database "cb", table "dbo.QuestionAnswers", column 'Id'.
+The statement has been terminated.
+
+Completion time: 2023-12-01T10:09:10.8261819+05:30
 
 
 
