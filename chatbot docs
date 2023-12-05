@@ -1,0 +1,31 @@
+Chatbot Documentation
+Goals:
+1.	Create a chat bot that can adapt to different database depends on the vendor can be use with different vendors.
+2.	It should have a basic functionality to answer the user query.
+3.	It should also be able to run some action if the user input requires.
+4.	It should have an Icon to toggle the chat bot.
+5.	It should have an admin page give add the data for the chatbot like question and answer, which action to run.
+6.	It should be web application.
+
+Technology used:
+1.	React for creating the UI and tailwind CSS for styling.
+2.	Dotnet 6 for handing and getting the appropriate response to the question from the database.
+
+Approach for goal:
+1.	This goal can be achieved with creating different table to store the data for different vendors each table can have 3 columns Question, Answer and Action and to interact with this table we can create controller in dotnet to create a webapi can we can make use of this api in react to fetch the data and response.
+2.	We can read this table for and find the answer to the question which is given by the user.
+3.	We can make use of reflation with dotnet each vendor can have VendorAction class in the backend we are saving the name of the action we just need to find the reference of the method in VendorAction.cs 
+4.	We can use reacts functional component and hooks with different libraries to create a reactive UI for chatbot.
+5.	We can make use of routing with react to create a separate page for admin to insert the data for the chat bot to work .
+6.	It is a static chatbot that gives response to a user question if the answer and action is saved in database. We can use same chat bot for different vendors by give different the name to the chatbot for each vendor .
+Eg. If there are three vendors named datatree & learnNdev
+ We give the name for Datatree chatbot Anjali & for LearnNdev
+Teacher peter 
+in chat bot we can trigger each chatbot by saying “hi Anjali”. 
+After that each question user will type it will search in tables that are created for that particular in our case Datatree until user chat the chatbot by prompting “hi Teacher peter” then after chatbot will start looking into LearnNdev vendor.
+
+
+
+	
+
+
