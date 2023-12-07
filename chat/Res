@@ -1,18 +1,18 @@
-const handleEdit = (questionId) => {
-  console.log('Edit clicked for questionId:', questionId);
+useEffect(() => {
+  if (selectedQuestion) {
+    setValue('mainQuestion', selectedQuestion.mainQuestion);
+    setValue('answer', selectedQuestion.answer);
+    setValue('actionToRun', selectedQuestion.actionToRun);
 
-  const selectedQuestion = questions.find((question) => question.questionAnswersId === questionId);
-  console.log('Selected Question:', selectedQuestion);
+    // Clear existing variations
+    while (fields.length > 0) {
+      remove(0);
+    }
 
-  setValue('mainQuestion', selectedQuestion.mainQuestion);
-  setValue('answer', selectedQuestion.answer);
-  setValue('actionToRun', selectedQuestion.actionToRun);
-
-  if (selectedQuestion.variations) {
-    selectedQuestion.variations.forEach((variation, index) => {
-      setValue(`variations.${index}.variationList`, variation.variationList);
-      setValue(`variations.${index}.variationId`, variation.variationId);
-    });
+    if (selectedQuestion.variations) {
+      selectedQuestion.variations.forEach((variation, index) => {
+        append({ variationList: variation.variationList });
+      });
+    }
   }
-};
-
+}, [selectedQuestion, setValue, fields, append, remove]);
