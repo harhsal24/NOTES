@@ -1,62 +1,71 @@
-// EditQuestionForm.jsx
-import React from 'react';
-import { useForm } from 'react-hook-form';
-
-const EditQuestionForm = ({ onSubmit, selectedQuestion, onCancel }) => {
-  const { handleSubmit, register, setValue, reset } = useForm();
-
-  React.useEffect(() => {
-    if (selectedQuestion) {
-      setValue('mainQuestion', selectedQuestion.mainQuestion);
-      setValue('answer', selectedQuestion.answer);
-      setValue('actionToRun', selectedQuestion.actionToRun);
-
-      if (selectedQuestion.variations) {
-        setValue('variations', selectedQuestion.variations);
-      }
-    }
-  }, [selectedQuestion, setValue]);
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-      {/* Form fields go here... */}
-
-      <button
-        type="button"
-        className="bg-gray-500 text-white p-2 mx-1"
-        onClick={() => {
-          reset();
-          onCancel(); // Trigger onCancel function to handle cancel/reset
-        }}
-      >
-        Cancel
-      </button>
-      <button type="submit" className="bg-blue-500 text-white p-2 mx-1">
-        Save Changes
-      </button>
-    </form>
-  );
-};
-
-export default EditQuestionForm;
-
-
-
 // AdminPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import QuestionForm from './QuestionForm';
 import EditQuestionForm from './EditQuestionForm';
+import * as api from '../api'; // Assuming you have an API file for handling server requests
 
 const AdminPage = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
-  const handleEdit = (questionId) => {
-    // Logic to fetch the selected question
-    setSelectedQuestion(selectedQuestionData);
+  useEffect(() => {
+    // Fetch questions when the component mounts
+    const fetchQuestions = async () => {
+      try {
+        const data = await api.getQuestions(selectedVendor); // Replace with your API call to get questions
+        setQuestions(data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
+  const handleEdit = async (questionId) => {
+    try {
+      // Fetch the selected question
+      const selectedQuestionData = await api.getQuestionById(questionId); // Replace with your API call to get a specific question
+      setSelectedQuestion(selectedQuestionData);
+    } catch (error) {
+      console.error('Error fetching selected question:', error);
+    }
   };
 
   const handleCancelEdit = () => {
     setSelectedQuestion(null);
+  };
+
+  const handleAddSubmit = async (data) => {
+    try {
+      // Logic to handle submission for adding a new question
+      await api.addQuestion(selectedVendor, data); // Replace with your API call to add a new question
+
+      // Refresh the list of questions
+      const updatedQuestions = await api.getQuestions(selectedVendor); // Replace with your API call to get updated questions
+      setQuestions(updatedQuestions);
+
+      // Reset the form and clear selectedQuestion
+      setSelectedQuestion(null);
+    } catch (error) {
+      console.error('Error adding question:', error);
+    }
+  };
+
+  const handleEditSubmit = async (data) => {
+    try {
+      // Logic to handle submission for editing the question
+      await api.editQuestion(selectedVendor, selectedQuestion.id, data); // Replace with your API call to edit a question
+
+      // Refresh the list of questions
+      const updatedQuestions = await api.getQuestions(selectedVendor); // Replace with your API call to get updated questions
+      setQuestions(updatedQuestions);
+
+      // Reset the form and clear selectedQuestion
+      setSelectedQuestion(null);
+    } catch (error) {
+      console.error('Error editing question:', error);
+    }
   };
 
   return (
@@ -64,13 +73,22 @@ const AdminPage = () => {
       {/* Other content... */}
 
       {selectedQuestion ? (
-        <EditQuestionForm onSubmit={yourEditSubmitFunction} selectedQuestion={selectedQuestion} onCancel={handleCancelEdit} />
+        <EditQuestionForm onSubmit={handleEditSubmit} selectedQuestion={selectedQuestion} onCancel={handleCancelEdit} />
       ) : (
-        <QuestionForm onSubmit={yourAddSubmitFunction} />
+        <QuestionForm onSubmit={handleAddSubmit} />
       )}
+
+      {/* Display the list of questions */}
+      <ul>
+        {questions.map((question) => (
+          <li key={question.id}>
+            {question.mainQuestion} -{' '}
+            <button onClick={() => handleEdit(question.id)}>Edit</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default AdminPage;
-
