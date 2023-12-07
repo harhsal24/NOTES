@@ -1,130 +1,15 @@
-// QuestionForm.jsx
 import React, { useEffect } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
 
-const QuestionForm = ({ onSubmit, selectedQuestion, setSelectedQuestion }) => {
-  const { handleSubmit, register, control, setValue, reset } = useForm();
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'variations',
-  });
+const EditQuestionForm = ({ onSubmit, selectedQuestion, onCancel }) => {
+  const { handleSubmit, register, setValue,fields,append,remove } = useForm();
 
   useEffect(() => {
-    if (selectedQuestion !== null) {
+    if (selectedQuestion!==null && selectedQuestion!==undefined) {
       setValue('mainQuestion', selectedQuestion.mainQuestion);
       setValue('answer', selectedQuestion.answer);
       setValue('actionToRun', selectedQuestion.actionToRun);
-
-      // Clear existing variations
-      while (fields.length > 0) {
-        remove(0);
-      }
-
-      if (selectedQuestion.variations) {
-        selectedQuestion.variations.forEach((variation) => {
-          append({ variationList: variation.variationList });
-        });
-      }
-    } else {
-      reset();
-    }
-  }, [selectedQuestion, append, fields, remove, setValue, reset]);
-
-  const handleReset = () => {
-    reset();
-    setSelectedQuestion(null);
-  };
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-      <div className="mb-4">
-        <label htmlFor="mainQuestion" className="block font-bold mb-2">
-          Main Question:
-        </label>
-        <input
-          type="text"
-          id="mainQuestion"
-          {...register('mainQuestion', { required: true })}
-          className="border p-2 w-full"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="answer" className="block font-bold mb-2">
-          Answer:
-        </label>
-        <input
-          type="text"
-          id="answer"
-          {...register('answer', { required: true })}
-          className="border p-2 w-full"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="actionToRun" className="block font-bold mb-2">
-          Action To Run:
-        </label>
-        <input
-          type="text"
-          id="actionToRun"
-          {...register('actionToRun', { required: true })}
-          className="border p-2 w-full"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block font-bold mb-2">Variations:</label>
-        {fields.map((field, index) => (
-          <div key={field.id} className="flex items-center space-x-2">
-            <input
-              type="text"
-              {...register(`variations.${index}.variationList`)}
-              defaultValue={field.variationList}
-              className="border p-2"
-            />
-            <button type="button" onClick={() => remove(index)}>
-              Remove
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={() => append({ variationList: '' })}>
-          <FaPlus />
-          Add Variation
-        </button>
-      </div>
-
-      <button
-        type="button"
-        className="bg-gray-500 text-white p-2 mx-1"
-        onClick={handleReset}
-      >
-        Reset
-      </button>
-      <button type="submit" className="bg-blue-500 text-white p-2 mx-1">
-        Submit
-      </button>
-    </form>
-  );
-};
-
-export default QuestionForm;
-
-// EditQuestionForm.jsx
-import React from 'react';
-import { useForm } from 'react-hook-form';
-
-const EditQuestionForm = ({ onSubmit, selectedQuestion, onCancel }) => {
-  const { handleSubmit, register, setValue, reset } = useForm();
-
-  React.useEffect(() => {
-    if (selectedQuestion) {
-      setValue('mainQuestion', selectedQuestion.mainQuestion);
-      setValue('answer', selectedQuestion.answer);
-      setValue('actionToRun', selectedQuestion.actionToRun);
-
-      // Clear existing variations
       setValue('variations', []);
 
       if (selectedQuestion.variations) {
@@ -212,3 +97,97 @@ const EditQuestionForm = ({ onSubmit, selectedQuestion, onCancel }) => {
 };
 
 export default EditQuestionForm;
+main.90c769833ccc00f3820f.hot-update.js:148  Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+    at EditQuestionForm (main.90c769833ccc00f3820f.hot-update.js:148:29)
+    at renderWithHooks (react-dom.development.js:16305:1)
+    at mountIndeterminateComponent (react-dom.development.js:20074:1)
+    at beginWork (react-dom.development.js:21587:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+    at invokeGuardedCallback (react-dom.development.js:4277:1)
+    at beginWork$1 (react-dom.development.js:27451:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+    at workLoopSync (react-dom.development.js:26466:1)
+EditQuestionForm @ main.90c769833ccc00f3820f.hot-update.js:148
+renderWithHooks @ react-dom.development.js:16305
+mountIndeterminateComponent @ react-dom.development.js:20074
+beginWork @ react-dom.development.js:21587
+callCallback @ react-dom.development.js:4164
+invokeGuardedCallbackDev @ react-dom.development.js:4213
+invokeGuardedCallback @ react-dom.development.js:4277
+beginWork$1 @ react-dom.development.js:27451
+performUnitOfWork @ react-dom.development.js:26557
+workLoopSync @ react-dom.development.js:26466
+renderRootSync @ react-dom.development.js:26434
+performSyncWorkOnRoot @ react-dom.development.js:26085
+flushSyncCallbacks @ react-dom.development.js:12042
+(anonymous) @ react-dom.development.js:25651
+QuestionItem.jsx:6 question form component {questionAnswersId: 3, mainQuestion: 'what is land?', answer: 'bhai land kara de', variations: Array(1), actionToRun: 'bhai safe '}
+main.90c769833ccc00f3820f.hot-update.js:148  Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+    at EditQuestionForm (main.90c769833ccc00f3820f.hot-update.js:148:29)
+    at renderWithHooks (react-dom.development.js:16305:1)
+    at mountIndeterminateComponent (react-dom.development.js:20074:1)
+    at beginWork (react-dom.development.js:21587:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+    at invokeGuardedCallback (react-dom.development.js:4277:1)
+    at beginWork$1 (react-dom.development.js:27451:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+    at workLoopSync (react-dom.development.js:26466:1)
+EditQuestionForm @ main.90c769833ccc00f3820f.hot-update.js:148
+renderWithHooks @ react-dom.development.js:16305
+mountIndeterminateComponent @ react-dom.development.js:20074
+beginWork @ react-dom.development.js:21587
+callCallback @ react-dom.development.js:4164
+invokeGuardedCallbackDev @ react-dom.development.js:4213
+invokeGuardedCallback @ react-dom.development.js:4277
+beginWork$1 @ react-dom.development.js:27451
+performUnitOfWork @ react-dom.development.js:26557
+workLoopSync @ react-dom.development.js:26466
+renderRootSync @ react-dom.development.js:26434
+recoverFromConcurrentError @ react-dom.development.js:25850
+performSyncWorkOnRoot @ react-dom.development.js:26096
+flushSyncCallbacks @ react-dom.development.js:12042
+(anonymous) @ react-dom.development.js:25651
+react-dom.development.js:18687  The above error occurred in the <EditQuestionForm> component:
+
+    at EditQuestionForm (https://localhost:44419/main.90c769833ccc00f3820f.hot-update.js:31:5)
+    at div
+    at AdminPage (https://localhost:44419/static/js/bundle.js:347:94)
+    at RenderedRoute (https://localhost:44419/static/js/bundle.js:174073:5)
+    at Routes (https://localhost:44419/static/js/bundle.js:174613:5)
+    at div
+    at Layout (https://localhost:44419/static/js/bundle.js:2008:1)
+    at App (https://localhost:44419/static/js/bundle.js:32:1)
+    at Router (https://localhost:44419/static/js/bundle.js:174551:15)
+    at BrowserRouter (https://localhost:44419/static/js/bundle.js:172818:5)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+overrideMethod @ console.js:213
+logCapturedError @ react-dom.development.js:18687
+update.callback @ react-dom.development.js:18720
+callCallback @ react-dom.development.js:13923
+commitUpdateQueue @ react-dom.development.js:13944
+commitLayoutEffectOnFiber @ react-dom.development.js:23391
+commitLayoutMountEffects_complete @ react-dom.development.js:24688
+commitLayoutEffects_begin @ react-dom.development.js:24674
+commitLayoutEffects @ react-dom.development.js:24612
+commitRootImpl @ react-dom.development.js:26823
+commitRoot @ react-dom.development.js:26682
+performSyncWorkOnRoot @ react-dom.development.js:26117
+flushSyncCallbacks @ react-dom.development.js:12042
+(anonymous) @ react-dom.development.js:25651
+Show 1 more frame
+Show less
+react-dom.development.js:12056  Uncaught TypeError: Cannot read properties of undefined (reading 'map')
+    at EditQuestionForm (main.90c769833ccc00f3820f.hot-update.js:148:29)
+    at renderWithHooks (react-dom.development.js:16305:1)
+    at mountIndeterminateComponent (react-dom.development.js:20074:1)
+    at beginWork (react-dom.development.js:21587:1)
+    at beginWork$1 (react-dom.development.js:27426:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+    at workLoopSync (react-dom.development.js:26466:1)
+    at renderRootSync (react-dom.development.js:26434:1)
+    at recoverFromConcurrentError (react-dom.development.js:25850:1)
+    at performSyncWorkOnRoot (react-dom.development.js:26096:1)
