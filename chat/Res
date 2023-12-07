@@ -1,0 +1,18 @@
+const handleEdit = (questionId) => {
+  console.log('Edit clicked for questionId:', questionId);
+
+  const selectedQuestion = questions.find((question) => question.questionAnswersId === questionId);
+  console.log('Selected Question:', selectedQuestion);
+
+  setValue('mainQuestion', selectedQuestion.mainQuestion);
+  setValue('answer', selectedQuestion.answer);
+  setValue('actionToRun', selectedQuestion.actionToRun);
+
+  if (selectedQuestion.variations) {
+    selectedQuestion.variations.forEach((variation, index) => {
+      setValue(`variations.${index}.variationList`, variation.variationList);
+      setValue(`variations.${index}.variationId`, variation.variationId);
+    });
+  }
+};
+
