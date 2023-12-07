@@ -1,18 +1,55 @@
-useEffect(() => {
-  if (selectedQuestion) {
-    setValue('mainQuestion', selectedQuestion.mainQuestion);
-    setValue('answer', selectedQuestion.answer);
-    setValue('actionToRun', selectedQuestion.actionToRun);
+import React, { useEffect } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { FaPlus } from 'react-icons/fa';
 
-    // Clear existing variations
-    while (fields.length > 0) {
-      remove(0);
-    }
+const QuestionForm = ({ onSubmit, selectedQuestion, setSelectedQuestion }) => {
+  const { handleSubmit, register, control, setValue, reset } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'variations',
+  });
 
-    if (selectedQuestion.variations) {
-      selectedQuestion.variations.forEach((variation, index) => {
-        append({ variationList: variation.variationList });
-      });
+  useEffect(() => {
+    if (selectedQuestion) {
+      setValue('mainQuestion', selectedQuestion.mainQuestion);
+      setValue('answer', selectedQuestion.answer);
+      setValue('actionToRun', selectedQuestion.actionToRun);
+
+      // Clear existing variations
+      while (fields.length > 0) {
+        remove(0);
+      }
+
+      if (selectedQuestion.variations) {
+        selectedQuestion.variations.forEach((variation, index) => {
+          append({ variationList: variation.variationList, variationId: variation.variationId });
+        });
+      }
+    } else {
+      // Reset the form if no selected question
+      reset();
     }
-  }
-}, [selectedQuestion, setValue, fields, append, remove]);
+  }, [selectedQuestion, append, fields, remove, setValue, reset]);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
+      {/* Form fields go here... */}
+
+      <button
+        type="button"
+        className="bg-gray-500 text-white p-2 mx-1"
+        onClick={() => {
+          reset();
+          setSelectedQuestion(null);
+        }}
+      >
+        Reset
+      </button>
+      <button type="submit" className="bg-blue-500 text-white p-2 mx-1">
+        Submit
+      </button>
+    </form>
+  );
+};
+
+export default QuestionForm;
