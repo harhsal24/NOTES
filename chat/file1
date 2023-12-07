@@ -1,0 +1,122 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useForm, Controller } from 'react-hook-form';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import QuestionItem from './QuestionItem';
+import QuestionForm from './QuestionForm';
+import * as api from '../api';
+
+const AdminPage = () => {
+  const vendors = ['base', 'calco', 'datatree', 'LND'];
+  const [selectedVendor, setSelectedVendor] = useState(vendors[0]);
+  const [questions, setQuestions] = useState([]);
+  const { control, setValue,reset } = useForm();
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const data = await api.getQuestions(selectedVendor);
+        console.log(data)
+        setQuestions(data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+
+    fetchQuestions();
+  }, [selectedVendor]);
+
+  
+  const handleEdit = (questionId) => {
+   debugger
+    const selectedQuestion = questions.find((question) => question.questionAnswersId === questionId);
+    setValue('mainQuestion', selectedQuestion.mainQuestion);
+    setValue('answer', selectedQuestion.answer);
+    setValue('actionToRun', selectedQuestion.actionToRun);
+  
+    if (selectedQuestion.variations) {
+      selectedQuestion.variations.forEach((variation, index) => {
+        setValue(`variations.${index}.variationList`, variation.variationList);
+        setValue(`variations.${index}.variationId`, variation.variationId);
+      });
+    }
+  };
+  
+
+  const handleDelete = async (questionId) => {
+    try {
+      await api.deleteQuestion(selectedVendor, questionId);
+      const updatedQuestions = questions.filter((question) => question.questionAnswersId !== questionId);
+      setQuestions(updatedQuestions);
+    } catch (error) {
+      console.error('Error deleting question:', error);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    console.log("hi from submit");
+    try {
+      if (data.variations) {
+        data.variations = data.variations.map((variation, index) => ({
+          variationList: variation.variationList,
+          variationId: index,
+        }));
+      }
+      console.log("data",data);
+      if (data.questionAnswersId) {
+        await api.updateQuestion(selectedVendor, data.questionAnswersId, data);
+      } else {
+        await api.addQuestion(selectedVendor, data);
+      }
+
+      const updatedQuestions = await api.getQuestions(selectedVendor);
+      setQuestions(updatedQuestions);
+      reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+
+  return (
+    <div className="container mx-auto p-4">
+
+<label htmlFor="vendor" className="block font-bold mb-2">
+        Select Vendor:
+      </label>
+      <select
+        id="vendor"
+        value={selectedVendor}
+        onChange={(e) => setSelectedVendor(e.target.value)}
+        className="border p-2 mb-4"
+      >
+        {vendors.map((vendor) => (
+          <option key={vendor} value={vendor}>
+            {vendor.toUpperCase()}
+          </option>
+        ))}
+      </select>
+
+      <h2 className="text-2xl font-bold mb-4">
+        {selectedVendor.toUpperCase()} Questions
+      </h2>
+
+      <ul className="list-none p-0">
+            {questions!==undefined && questions.map((question) => (
+              <li key={question.questionAnswersId} className="mb-4 border p-4">
+                 <QuestionItem
+                key={question.questionAnswersId}
+                question={question}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+              </li>
+            ))}
+          </ul>
+
+        <QuestionForm  onSubmit={onSubmit} />
+    </div>
+  );
+};
+
+export default AdminPage;
