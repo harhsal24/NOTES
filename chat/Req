@@ -1,0 +1,25 @@
+Request body for Post add question
+{
+  "mainQuestion": "string",
+  "answer": "string",
+  "actionToRun": "string",
+  "variations": [
+    {
+      "variationList": "string"
+    }
+  ]
+}
+
+Request body for put edit question
+
+{
+  "mainQuestion": "string",
+  "answer": "string",
+  "actionToRun": "string",
+  "variations": [
+    {
+      "variationList": "string",
+      "variationId": 0
+    }
+  ]
+}
