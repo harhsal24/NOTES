@@ -71,6 +71,71 @@ VALUES
     (29, 14, 'Riddle time'),
     (30, 15, 'Favorite food?'),
     (31, 15, 'What do you eat?');
+    (1, 'What are you called?'),
+    (1, 'Your name?'),
+    (2, 'Say something funny'),
+    (2, 'Tell me a funny story'),
+    (3, 'Meaning of life?'),
+    (3, 'What''s the purpose of life?'),
+    (4, 'Who made you?'),
+    (4, 'Your creator?'),
+    (5, 'What''s your purpose?'),
+    (5, 'Why do you exist?'),
+    (6, 'Give me a fun fact'),
+    (6, 'Tell me something interesting'),
+    (7, 'How do you feel?'),
+    (7, 'Your mood?'),
+    (8, 'Farewell'),
+    (8, 'Say bye'),
+    (8, 'Goodbye'),
+    (9, 'Square of 5'),
+    (9, 'Calculate 5 squared'),
+    (10, 'Favorite color?'),
+    (10, 'Color you like?'),
+    (11, 'What''s in your inventory?'),
+    (11, 'List of items'),
+    (12, 'Can you dance?'),
+    (12, 'Dancing skills?'),
+    (13, 'Languages you speak?'),
+    (13, 'What languages do you understand?'),
+    (14, 'Give me a riddle'),
+    (14, 'Riddle time'),
+    (15, 'Favorite food?'),
+    (15, 'What do you eat?');
+
+
+Msg 547, Level 16, State 0, Line 5
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK_VariationsTable_QuestionAnswers_QuestionAnswerId". The conflict occurred in database "cb", table "dbo.QuestionAnswers", column 'Id'.
+The statement has been terminated.
+
+Completion time: 2023-12-01T10:09:10.8261819+05:30
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+USE [cb]
 GO
 
 

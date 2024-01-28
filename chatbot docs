@@ -1,0 +1,88 @@
+Chatbot Documentation
+Goals:
+1.	Create a chat bot that can adapt to different database depends on the vendor can be use with different vendors.
+2.	It should have a basic functionality to answer the user query.
+3.	It should also be able to run some action if the user input requires.
+4.	It should have an Icon to toggle the chat bot.
+5.	It should have an admin page give add the data for the chatbot like question and answer, which action to run.
+6.	It should be web application.
+
+Technology used:
+1.	React for creating the UI and tailwind CSS for styling.
+2.	Dotnet 6 for handing and getting the appropriate response to the question from the database.
+
+Approach for goal:
+1.	This goal can be achieved with creating different table to store the data for different vendors each table can have 3 columns Question, Answer and Action and to interact with this table we can create controller in dotnet to create a webapi can we can make use of this api in react to fetch the data and response.
+2.	We can read this table for and find the answer to the question which is given by the user.
+3.	We can make use of reflation with dotnet each vendor can have VendorAction class in the backend we are saving the name of the action we just need to find the reference of the method in VendorAction.cs 
+4.	We can use reacts functional component and hooks with different libraries to create a reactive UI for chatbot.
+5.	We can make use of routing with react to create a separate page for admin to insert the data for the chat bot to work .
+6.	It is a static chatbot that gives response to a user question if the answer and action is saved in database. We can use same chat bot for different vendors by give different the name to the chatbot for each vendor .
+Eg. If there are three vendors named datatree & learnNdev
+ We give the name for Datatree chatbot Anjali & for LearnNdev
+Teacher peter 
+in chat bot we can trigger each chatbot by saying “hi Anjali”. 
+After that each question user will type it will search in tables that are created for that particular in our case Datatree until user chat the chatbot by prompting “hi Teacher peter” then after chatbot will start looking into LearnNdev vendor.
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+Chatbot Documentation
+Goals:
+Adaptable Database Structure:
+
+Create separate tables for each vendor in the database, containing columns for Question, Answer, and Action.
+Allow the chatbot to dynamically switch between these tables based on the vendor.
+Basic Query Response:
+
+Develop a fundamental functionality for the chatbot to provide answers to user queries.
+Action Execution:
+
+Implement a mechanism for the chatbot to execute specific actions based on user inputs.
+Toggle Icon:
+
+Design an intuitive icon to toggle the chatbot, ensuring user-friendly interaction.
+Admin Page for Data Management:
+
+Create a dedicated admin page using React, allowing administrators to add and manage data for the chatbot, such as questions, answers, and associated actions.
+Web Application:
+
+Develop the chatbot as a web application using React for the frontend and Dotnet 6 for backend operations.
+Technology Stack:
+Frontend:
+
+Utilize React for building a responsive user interface.
+Apply Tailwind CSS for styling to enhance the visual appeal.
+Backend:
+
+Employ Dotnet 6 to handle requests and retrieve appropriate responses from the database.
+Approach for Goals:
+Database Interaction:
+
+Establish separate tables for each vendor, ensuring a modular structure for efficient data retrieval.
+Create a Dotnet controller to serve as a web API for React to fetch data from the appropriate vendor's table.
+Query Resolution:
+
+Read the relevant vendor table to identify and provide answers to user queries.
+Action Execution with Reflection:
+
+Leverage reflection in Dotnet to dynamically reference methods within a VendorAction class, enabling the execution of specific actions based on user inputs.
+Reactive UI with React Functional Components:
+
+Implement a reactive user interface using React's functional components and hooks, enhancing user experience during interactions with the chatbot.
+Admin Page with Routing:
+
+Utilize React routing to create a separate admin page for data management, enabling administrators to input and modify chatbot-related data.
+Vendor-specific Chatbot Naming:
+
+Allow for differentiating between chatbots for various vendors by assigning unique names (e.g., "Anjali" for Datatree and "Teacher Peter" for LearnNdev).

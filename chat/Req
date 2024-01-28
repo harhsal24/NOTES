@@ -1,0 +1,44 @@
+useEffect(() => {
+  if (selectedQuestion !== null && selectedQuestion !== undefined) {
+    setValue('mainQuestion', selectedQuestion.mainQuestion);
+    setValue('answer', selectedQuestion.answer);
+    setValue('actionToRun', selectedQuestion.actionToRun);
+
+    if (selectedQuestion.variations) {
+      // Clear existing variations
+      while (fields.length > 0) {
+        remove(0);
+      }
+
+      selectedQuestion.variations.forEach((variation) => {
+        append({ variationList: variation.variationList });
+      });
+    }
+  } else {
+    reset();
+  }
+}, [selectedQuestion, setValue, reset, fields, append, remove]);
+
+
+
+
+useEffect(() => {
+  if (selectedQuestion !== null && selectedQuestion !== undefined) {
+    setValue('mainQuestion', selectedQuestion.mainQuestion);
+    setValue('answer', selectedQuestion.answer);
+    setValue('actionToRun', selectedQuestion.actionToRun);
+
+    if (selectedQuestion.variations) {
+      // Clear existing variations
+      while (fields.length > 0) {
+        remove(0);
+      }
+
+      selectedQuestion.variations.forEach((variation) => {
+        append({ variationList: variation.variationList });
+      });
+    }
+  } else {
+    reset();
+  }
+}, [selectedQuestion, setValue, reset, fields, append, remove]);

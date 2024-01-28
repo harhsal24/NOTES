@@ -1,0 +1,68 @@
+// src/components/CrudOperations.js
+import React, { useState } from 'react';
+import data from '../../data.json';
+
+const CrudOperations = () => {
+  const [items, setItems] = useState(data);
+  const [newItem, setNewItem] = useState('');
+  const [editItem, setEditItem] = useState({ id: null, name: '' });
+
+  const addItem = () => {
+    const newItemObj = { id: Date.now(), name: newItem };
+    setItems([...items, newItemObj]);
+    setNewItem('');
+  };
+
+  const updateItem = () => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === editItem.id ? { ...item, name: editItem.name } : item
+      )
+    );
+    setEditItem({ id: null, name: '' });
+  };
+
+  const deleteItem = (id) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  return (
+    <div>
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            {item.name}
+            <button onClick={() => setEditItem(item)}>Edit</button>
+            <button onClick={() => deleteItem(item.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+
+      <div>
+        <h2>Add Item</h2>
+        <input
+          type="text"
+          value={newItem}
+          onChange={(e) => setNewItem(e.target.value)}
+        />
+        <button onClick={addItem}>Add</button>
+      </div>
+
+      {editItem.id && (
+        <div>
+          <h2>Edit Item</h2>
+          <input
+            type="text"
+            value={editItem.name}
+            onChange={(e) =>
+              setEditItem({ ...editItem, name: e.target.value })
+            }
+          />
+          <button onClick={updateItem}>Update</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CrudOperations
