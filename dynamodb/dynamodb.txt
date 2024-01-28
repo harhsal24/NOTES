@@ -1,0 +1,72 @@
+docker pull amazon/dynamodb-local
+
+
+docker run -p 8000:8000 amazon/dynamodb-local
+
+
+docker run -it --rm -p 8000:8000 amazon/dynamodb-local bash
+
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+
+aws dynamodb create-table \
+  --table-name MyTable \
+  --attribute-definitions AttributeName=ID,AttributeType=N \
+  --key-schema AttributeName=ID,KeyType=HASH \
+  --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+  --endpoint-url http://localhost:8000
+
+
+
+aws dynamodb create-table --table-name MyTable --attribute-definitions AttributeName=ID,AttributeType=N --key-schema AttributeName=ID,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000
+
+
+
+aws dynamodb put-item \
+  --table-name MyTable \
+  --item '{"ID": {"N": "1"}, "Name": {"S": "John Doe"}, "Age": {"N": "30"}}' \
+  --endpoint-url http://localhost:8000
+
+
+
+aws dynamodb put-item --table-name MyTable --item "{\"ID\":{\"N\":\"1\"},\"Name\":{\"S\":\"John Doe\"},\"Age\":{\"N\":\"30\"}}" --endpoint-url http://localhost:8000
+
+
+
+aws dynamodb scan --table-name MyTable --endpoint-url http://localhost:8000
+
+
+
+docker run -it --rm -p 8000:8000 -v dynamodb_data:/home/dynamodblocal amazon/dynamodb-local
+
+
+
+
+# List volumes
+docker volume ls
+
+
+#Create a volume
+docker volume create dynamodb_data
+
+
+# Inspect a volume
+docker volume inspect dynamodb_data
+
+
+# Remove a volume (caution: data will be lost)
+docker volume rm dynamodb_data
+
+
+
+docker run -it --rm -p 8000:8000 -v C:\path\on\your\machine:/home/dynamodblocal amazon/dynamodb-local
+
+
+
+docker run -it --rm -p 8000:8000 -v C:/company:/home/dynamodblocal/db amazon/dynamodb-local
+
+
+docker run -it --rm -p 8000:8000 -v C:/company:/home/dynamodblocal/db amazon/dynamodb-local -jar DynamoDBLocal.jar -sharedDb -dbPath ./db
+
+	
+
