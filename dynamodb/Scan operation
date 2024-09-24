@@ -1,0 +1,62 @@
+Explanation:
+ScanRequest:
+
+TableName: Specifies the table you want to scan.
+FilterExpression: This is the condition that filters items after the scan operation has been executed. In this case, we are filtering items where the Status attribute is "Active".
+ExpressionAttributeValues: These are the values for the placeholders used in the filter expression. Here, :status is mapped to the string "Active".
+Scan Execution:
+
+ScanAsync sends the scan request to DynamoDB, and the response contains all items that match the filter condition.
+Processing Results:
+
+After the scan is completed, you can iterate over scanResponse.Items to process each item. Here, it's printing the PK (Partition Key) and Status attributes of each item.
+Notes on the Scan Operation:
+Full Table Scan: The Scan operation reads every item in the table, so even though a FilterExpression is used to limit the results, DynamoDB still scans the entire table.
+Expensive: Because it scans all items, this operation is more expensive and slower, especially for large tables. It's generally better to use Query operations when possible.
+Limiting the Attributes Returned with ProjectionExpression:
+You can limit the attributes DynamoDB returns by using ProjectionExpression to retrieve only certain fields.
+
+csharp
+Copy code
+var scanRequest = new ScanRequest
+{
+    TableName = "YourTableName",
+    FilterExpression = "Status = :status",
+    ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+    {
+        { ":status", new AttributeValue { S = "Active" } }
+    },
+    ProjectionExpression = "PK, Status" // Only return PK and Status attributes
+};
+Pagination in Scan:
+Since a Scan can return a large amount of data, it might be paginated if the results exceed the maximum limit (1 MB of data per request). You need to handle pagination using the LastEvaluatedKey to fetch the next page of results.
+
+csharp
+Copy code
+var scanRequest = new ScanRequest
+{
+    TableName = "YourTableName",
+    FilterExpression = "Status = :status",
+    ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+    {
+        { ":status", new AttributeValue { S = "Active" } }
+    }
+};
+
+do
+{
+    var scanResponse = await dynamoDBClient.ScanAsync(scanRequest);
+
+    foreach (var item in scanResponse.Items)
+    {
+        Console.WriteLine($"Item: {item["PK"].S}, Status: {item["Status"].S}");
+    }
+
+    // Set the LastEvaluatedKey to the value of the last item
+    scanRequest.ExclusiveStartKey = scanResponse.LastEvaluatedKey;
+
+} while (scanRequest.ExclusiveStartKey != null && scanRequest.ExclusiveStartKey.Count > 0);
+Key Takeaways:
+Scan operations can be costly and should be avoided for large tables if a Query can be used instead.
+Pagination is needed when the size of the data exceeds 1 MB.
+Use FilterExpression to limit the data you retrieve, but be aware that the entire table is scanned first.
