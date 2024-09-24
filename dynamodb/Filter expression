@@ -1,0 +1,23 @@
+var dynamoDBClient = new AmazonDynamoDBClient();
+var context = new DynamoDBContext(dynamoDBClient);
+
+// Construct the QueryRequest
+var queryRequest = new QueryRequest
+{
+    TableName = "YourTableName",
+    KeyConditionExpression = "PK = :pk AND begins_with(SK, :skPrefix)",
+    ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+    {
+        { ":pk", new AttributeValue { S = "YourPKValue" } },
+        { ":skPrefix", new AttributeValue { S = "YourSKPrefix" } },
+        { ":startDate", new AttributeValue { S = "2023-09-01" } },  // Adjust date as necessary
+        { ":endDate", new AttributeValue { S = "2023-09-30" } }    // Adjust date as necessary
+    },
+    FilterExpression = "DateAttribute BETWEEN :startDate AND :endDate"
+};
+
+// Execute the query
+var queryResponse = await dynamoDBClient.QueryAsync(queryRequest);
+
+// Deserialize the results into your model class
+var items = context.FromDocuments<YourModel>(queryResponse.Items);
