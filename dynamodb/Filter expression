@@ -41,3 +41,35 @@ var queryRequest = new QueryRequest
 };
 
 var queryResponse = await dynamoDBClient.QueryAsync(queryRequest);
+
+
+
+
+
+
+
+
+
+var dynamoDBClient = new AmazonDynamoDBClient();
+
+// Construct the ScanRequest
+var scanRequest = new ScanRequest
+{
+    TableName = "YourTableName",
+    // Use FilterExpression to limit the items that will be returned
+    FilterExpression = "Status = :status",
+    ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+    {
+        { ":status", new AttributeValue { S = "Active" } }
+    }
+};
+
+// Execute the Scan
+var scanResponse = await dynamoDBClient.ScanAsync(scanRequest);
+
+// Process the scan result
+foreach (var item in scanResponse.Items)
+{
+    // Do something with each item
+    Console.WriteLine($"Item: {item["PK"].S}, Status: {item["Status"].S}");
+}
